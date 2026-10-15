@@ -1,0 +1,26 @@
+{
+  "schema": "fineweb-source-manifest-v1",
+  "dataset": "HuggingFaceFW/fineweb-edu",
+  "config": "sample-10BT",
+  "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+  "source_url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/tree/87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+  "license": "ODC-BY",
+  "attribution": "FineWeb-Edu, Hugging Face; The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale, https://arxiv.org/abs/2406.17557",
+  "selection": "First two ordered shards of publisher sample-10BT. Encoding stops at complete-document split targets; not a uniform fresh sample of the entire repository.",
+  "files": [
+    {
+      "path": "data/fineweb-edu-1b-v1/raw/000_00000.parquet",
+      "relative_path": "sample/10BT/000_00000.parquet",
+      "bytes": 2152819114,
+      "sha256": "b1ba7b2ce4cb5ea6ef42dca40263eabb85f37700d01693a68e9b30a31d78e871",
+      "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/resolve/87f09149ef4734204d70ed1d046ddc9ca3f2b8f9/sample/10BT/000_00000.parquet"
+    },
+    {
+      "path": "data/fineweb-edu-1b-v1/raw/001_00000.parquet",
+      "relative_path": "sample/10BT/001_00000.parquet",
+      "bytes": 2152222432,
+      "sha256": "3fcf2dc69cd52503986276d3d2d26a8c356d0f2ea28a0de4fdbda8cf87755693",
+      "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/resolve/87f09149ef4734204d70ed1d046ddc9ca3f2b8f9/sample/10BT/001_00000.parquet"
+    }
+  ]
+}

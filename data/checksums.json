@@ -1,0 +1,7 @@
+{
+  "tokenizer.json": "f341e80054608ebaba4b1917723a7df7fe7ed3e3f9d0015f35605081c7cb749a",
+  "train.bin": "e5a918999fdd289e5c0c00ea587b83bc0d46266626194d6990893429f28b3af8",
+  "val.bin": "aee393810781d1936e1f5e4ba66da4734872834244d96cc65c83e23a858bb7b7",
+  "test.bin": "aab06751215dca1df178e26a3adbecdd84c658bcda1035794e0f0a9a984e96b9",
+  "note": "Token-file and tokenizer hashes are portable. Metadata/source-manifest hashes change with local paths and exported source metadata."
+}

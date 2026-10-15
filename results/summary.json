@@ -1,0 +1,145 @@
+{
+  "schema": "v50-mlp-publication-results-v1",
+  "recorded_runs_started_utc": "2026-10-12",
+  "training_status": "paused before the planned 1B-token endpoint",
+  "matched_update": 15260,
+  "matched_training_tokens_per_model": 500039680,
+  "planned_training_updates": 30518,
+  "planned_sampled_training_tokens_per_model": 1000013824,
+  "planned_budget_completed": false,
+  "evaluation_split": "development validation, repeatedly reused; reserved test set not used",
+  "matched_trained_validation_points": 157,
+  "v50_lower_perplexity_at_matched_points": 157,
+  "initial_score_used_for_ranking": false,
+  "primary_result": {
+    "V50": {
+      "parameters": 29726752,
+      "cross_entropy": 3.3728348314762115,
+      "perplexity": 29.161076733509304,
+      "logged_training_seconds": 8191.560035375909,
+      "logged_active_wall_seconds": 8555.510090518997
+    },
+    "MLP": {
+      "parameters": 29676544,
+      "cross_entropy": 3.3977988809347153,
+      "perplexity": 29.898218029191206,
+      "logged_training_seconds": 4939.435697559096,
+      "logged_active_wall_seconds": 5174.0786129759945
+    },
+    "v50_minus_mlp_cross_entropy": -0.024964049458503723,
+    "v50_vs_mlp_perplexity_change_percent": -2.4655024421930127,
+    "v50_parameter_difference": 50208,
+    "v50_parameter_change_percent": 0.16918412063076094,
+    "v50_to_mlp_logged_training_time_ratio": 1.6583999746011278,
+    "v50_to_mlp_logged_active_wall_time_ratio": 1.653533069455644
+  },
+  "milestones": [
+    {
+      "updates": 600,
+      "training_tokens": 19660800,
+      "mlp_perplexity": 152.05659729006948,
+      "v50_perplexity": 131.61886762802652,
+      "v50_vs_mlp_perplexity_change_percent": -13.440870061727805
+    },
+    {
+      "updates": 3052,
+      "training_tokens": 100007936,
+      "mlp_perplexity": 47.06554297029234,
+      "v50_perplexity": 45.299719168822975,
+      "v50_vs_mlp_perplexity_change_percent": -3.7518398599670877
+    },
+    {
+      "updates": 6104,
+      "training_tokens": 200015872,
+      "mlp_perplexity": 37.71129466749529,
+      "v50_perplexity": 36.50566112874864,
+      "v50_vs_mlp_perplexity_change_percent": -3.1970091437508397
+    },
+    {
+      "updates": 9156,
+      "training_tokens": 300023808,
+      "mlp_perplexity": 33.78547295050523,
+      "v50_perplexity": 32.81596205856142,
+      "v50_vs_mlp_perplexity_change_percent": -2.8696087616240207
+    },
+    {
+      "updates": 12208,
+      "training_tokens": 400031744,
+      "mlp_perplexity": 31.501107295401507,
+      "v50_perplexity": 30.743742072790663,
+      "v50_vs_mlp_perplexity_change_percent": -2.404249525290192
+    },
+    {
+      "updates": 15260,
+      "training_tokens": 500039680,
+      "mlp_perplexity": 29.898218029191206,
+      "v50_perplexity": 29.161076733509304,
+      "v50_vs_mlp_perplexity_change_percent": -2.4655024421930127
+    }
+  ],
+  "available_run_endpoints": {
+    "MLP": {
+      "completed_updates": 17024,
+      "sampled_training_tokens": 557842432,
+      "last_evaluated_update": 17000,
+      "last_evaluated_perplexity": 29.075455667899273,
+      "validation_rows_in_csv": 176,
+      "training_measurements_in_csv": 1706
+    },
+    "V50": {
+      "completed_updates": 15260,
+      "sampled_training_tokens": 500039680,
+      "last_evaluated_update": 15260,
+      "last_evaluated_perplexity": 29.161076733509304,
+      "validation_rows_in_csv": 158,
+      "training_measurements_in_csv": 1530
+    }
+  },
+  "verification": {
+    "matched_stage_cpu_state_audits_passed": true,
+    "validation_metrics_match_recorded_audits_exactly": true,
+    "native_source_files_match_manifest_hashes": true,
+    "fresh_zero_update_origin_confirmed": true,
+    "new_training_performed_for_publication": false,
+    "new_model_inference_performed_for_publication": false,
+    "exact_gpu_replay_at_publication_time": false,
+    "scope": "Read-only metric export and historical CPU state-audit checks; no fresh numerical replay or uncertainty estimate."
+  },
+  "provenance": {
+    "original_protocol_sha256": "0376a782ad1e87b638a38c2bc60e4ab3706675775a4ad1448ea631155b1b7c80",
+    "original_controller_sha256": "2c4d8977105b3a53f159b2e01974174eba8c561e00c313e6eac5e8529e86a384",
+    "runs": {
+      "MLP": {
+        "metrics_sha256": "f64934aa20aad4c9a9c791986f792136d85a6b345c2a41382f2a5d8ba1c1dfaf",
+        "manifest_sha256": "2cdc99ce6014e3fea4fd88a98732cff989447a711d6d2469f999619977078df1",
+        "native_source_sha256": {
+          "model.py": "9714df3c49414a43c9b43fc38ed3b273500a1df6849044772e416c5f911143e8",
+          "train.py": "e595ec916135ad45fa984d5285fa3403fa7ec0fd636f49203ffe935e518ca7f9"
+        },
+        "matched_checkpoint_audit_sha256": "a7f11cb4153a9f7174ebfe1a1361eef7d5121a4aec7a48332ab65d74bdce2b93",
+        "matched_checkpoint_sha256_recorded_by_audit": "06ebcce52962ec7c66521f9e934ab01b857beca484fa744a93cb6c38fa007269"
+      },
+      "V50": {
+        "metrics_sha256": "a4472eb3b806462c1d31f384449bfb47df574139e17641fccb9fb46bf78b540a",
+        "manifest_sha256": "949bbea963a091a160c909bde1647eb0dcd1930a3f7392775de410c5379cda14",
+        "native_source_sha256": {
+          "train.py": "ecf12d9dc38a2b039b2d04829ffb4ef1a942a38e85865b280e6282d70bf3e5f6",
+          "model.py": "278fab2c6d2cbbfecf32c020aa83ca171025cb069990a425e5db183a887bc35b",
+          "v15.py": "f6d2d2151d30329649d52ec9c49f9c2cafbc48caf5f6b8f85382aae35c455b6b"
+        },
+        "matched_checkpoint_audit_sha256": "9498e8ea53f2f232280c4d937c5b74a33374ea37c438e46b76bd4f8f5c2b2d26",
+        "matched_checkpoint_sha256_recorded_by_audit": "f013c1b769a4188b13346cc080886ff23e0d4cd207ed7b8cb1601f7a55be24eb"
+      }
+    }
+  },
+  "limitations": [
+    "Single training seed and one repeatedly reused development sample; no confidence interval or independent test-set result.",
+    "The planned 1B-token runs are incomplete. The primary comparison stops at the longest common evaluated budget of 500,039,680 sampled tokens.",
+    "Sampling is with replacement; sampled-token count is not unique corpus coverage or an epoch.",
+    "V50 has 0.169% more parameters and its native spherical-position optimizer differs from the baseline optimizer.",
+    "V50 uses more logged training time at equal tokens; timing is historical, not a controlled speed benchmark.",
+    "Only validation events produce plotted scores; training status records can contain stale validation values and are not treated as new evaluations.",
+    "The main plot excludes initial scores and the MLP-only extension. Full available curves remain in validation.csv.",
+    "Resident diagnostics in the native metric log use one fixed window and are not exported as broad activity evidence."
+  ]
+}

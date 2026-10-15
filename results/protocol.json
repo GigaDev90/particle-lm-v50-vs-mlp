@@ -1,0 +1,205 @@
+{
+  "schema": "v50-mlp-publication-protocol-v1",
+  "comparison": "Fresh V50 resident model versus standard GELU-MLP Transformer; native architecture and optimizer recipes retained.",
+  "fresh_start": true,
+  "seed": 1337,
+  "same_data_and_training_order": true,
+  "same_seed_does_not_imply_identical_shared_weight_tensors": true,
+  "architecture": {
+    "MLP": {
+      "vocab_size": 8192,
+      "context_length": 512,
+      "n_layers": 8,
+      "width": 512,
+      "n_heads": 8,
+      "ff_width": 2048,
+      "dropout": 0.0,
+      "bias": true
+    },
+    "V50": {
+      "vocab_size": 8192,
+      "context_length": 512,
+      "n_layers": 8,
+      "width": 512,
+      "n_heads": 8,
+      "n_routing_heads": 4,
+      "routing_dim": 128,
+      "response_channels": 4,
+      "dropout": 0.0,
+      "bias": true,
+      "target_parameters": 29676544,
+      "n_particles": 436,
+      "radius_squared": 2.171848773956299,
+      "kernel_gain": 6.617806196212754,
+      "response_init_gain": 1.0750019319619315,
+      "resident_init": "random",
+      "gate_mode": "radial",
+      "routing_precision": "mixed"
+    }
+  },
+  "parameter_counts": {
+    "MLP": 29676544,
+    "V50": 29726752
+  },
+  "training": {
+    "microbatch_sequences": 16,
+    "context_length": 512,
+    "gradient_accumulation_steps": 4,
+    "tokens_per_optimizer_update": 32768,
+    "target_updates": 30518,
+    "target_sampled_tokens": 1000013824,
+    "published_primary_updates": 15260,
+    "published_primary_tokens": 500039680,
+    "base_peak_learning_rate": 0.0003,
+    "base_final_learning_rate": 3e-05,
+    "warmup_updates": 100,
+    "schedule": "Linear warmup followed by cosine decay over the full 30,518-update target; retained unchanged across saved stage resumes.",
+    "weight_decay": 0.1,
+    "adam_betas": [
+      0.9,
+      0.95
+    ],
+    "adam_epsilon": 1e-08,
+    "dropout": 0.0,
+    "sampling": "NumPy default_rng(seed=1337); uniform random contiguous 512-input/512-target windows with replacement from packed training tokens; four batches of 16 per optimizer update.",
+    "mlp_optimizer": "AdamW; matrix parameters decay 0.1, lower-dimensional parameters do not; global norm clip 1.",
+    "v50_position_optimizer": {
+      "name": "unit_sphere_tangent_adam",
+      "position_parameter_suffix": ".field.raw_positions",
+      "position_direction_lr_scale": 0.8671654817246768,
+      "position_peak_lr": 0.00026014964451740304,
+      "position_weight_decay": 0.0,
+      "position_initialization": "unit_norm",
+      "position_clip_reference": "initial_raw_norm",
+      "position_moments": "ambient_adam_no_transport",
+      "base_peak_lr": 0.0003,
+      "base_weight_decay": 0.1
+    },
+    "v50_initial_write_scale": 0.5,
+    "v50_write_scale_scope": "Initialization only; no runtime output multiplier.",
+    "models_compiled": false
+  },
+  "evaluation": {
+    "split": "validation/development",
+    "fixed_seed": 12345,
+    "targets_per_evaluation": 131072,
+    "windows_per_evaluation": 256,
+    "context_length": 512,
+    "sampling": "256 fixed random windows drawn from the validation token array with NumPy default_rng(12345); the same windows at every evaluation and in both models.",
+    "interval_updates": 100,
+    "additional_stage_boundaries": [
+      600,
+      3052,
+      6104,
+      9156,
+      12208,
+      15260
+    ],
+    "perplexity": "exp(token-averaged cross entropy in natural logarithms)",
+    "reserved_test_set_used": false
+  },
+  "dataset": {
+    "id": "HuggingFaceFW/fineweb-edu",
+    "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+    "variant": "sample-10BT",
+    "license": "ODC-BY",
+    "attribution": "FineWeb-Edu, Hugging Face; The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale, https://arxiv.org/abs/2406.17557",
+    "source_files": [
+      {
+        "relative_path": "sample/10BT/000_00000.parquet",
+        "bytes": 2152819114,
+        "sha256": "b1ba7b2ce4cb5ea6ef42dca40263eabb85f37700d01693a68e9b30a31d78e871",
+        "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/resolve/87f09149ef4734204d70ed1d046ddc9ca3f2b8f9/sample/10BT/000_00000.parquet"
+      },
+      {
+        "relative_path": "sample/10BT/001_00000.parquet",
+        "bytes": 2152222432,
+        "sha256": "3fcf2dc69cd52503986276d3d2d26a8c356d0f2ea28a0de4fdbda8cf87755693",
+        "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/resolve/87f09149ef4734204d70ed1d046ddc9ca3f2b8f9/sample/10BT/001_00000.parquet"
+      }
+    ],
+    "prepared_splits": {
+      "train": {
+        "tokens": 1000000163,
+        "documents": 815627,
+        "sha256": "e5a918999fdd289e5c0c00ea587b83bc0d46266626194d6990893429f28b3af8"
+      },
+      "val": {
+        "tokens": 2000383,
+        "documents": 1554,
+        "sha256": "aee393810781d1936e1f5e4ba66da4734872834244d96cc65c83e23a858bb7b7"
+      },
+      "test": {
+        "tokens": 2001913,
+        "documents": 1660,
+        "sha256": "aab06751215dca1df178e26a3adbecdd84c658bcda1035794e0f0a9a984e96b9"
+      }
+    },
+    "split_policy": "SHA256 of outer-whitespace-stripped exact UTF8 content; first 64 digest bits modulo 10,000: [0,9900) train, [9900,9950) val, [9950,10000) test.",
+    "packing": "One EOS per complete document; concatenated bins allow native attention windows to cross document boundaries.",
+    "selection": "First distinct documents in pinned source order assigned to this content-hash split, until token target is reached; final document retained whole.",
+    "near_duplicate_removal_claimed": false,
+    "tokenizer": {
+      "vocabulary_size": 8192,
+      "type": "Byte-level BPE",
+      "sha256": "f341e80054608ebaba4b1917723a7df7fe7ed3e3f9d0015f35605081c7cb749a",
+      "eos_token_id": 0,
+      "library_version": "0.23.2",
+      "training_split": "train only",
+      "training_documents": 20723,
+      "training_utf8_bytes": 99987844,
+      "selection": "First unique training-split documents in pinned source/row order, stopping before byte cap or at document cap; whole documents only.",
+      "reserved_token_content_handling": "encode_special_tokens=True: literal reserved-token spellings in source text are encoded as ordinary content bytes; one EOS (ID 0) is appended explicitly per document."
+    },
+    "prepared_artifact_hashes": {
+      "train.bin": "e5a918999fdd289e5c0c00ea587b83bc0d46266626194d6990893429f28b3af8",
+      "train.boundaries.npy": "8de19117925c7babc8fdbd9bd726b41b9d4764f007194c35b7f9483f0a411686",
+      "val.bin": "aee393810781d1936e1f5e4ba66da4734872834244d96cc65c83e23a858bb7b7",
+      "val.boundaries.npy": "78056b23fe06002fd49c5df71a3978a40e00fbaba8d7a579b7e3ae358ecd77c5",
+      "test.bin": "aab06751215dca1df178e26a3adbecdd84c658bcda1035794e0f0a9a984e96b9",
+      "test.boundaries.npy": "6e4d387a60286d2ef4e54d64140fb150842e791afa6ec9d2e532b9b9b4196ccb",
+      "tokenizer.json": "f341e80054608ebaba4b1917723a7df7fe7ed3e3f9d0015f35605081c7cb749a",
+      "documents.sqlite": "a9192c07f91a47dc2d91b84c662723fa65c5618bebd59b0439b2163be9f10c99",
+      "tokenizer-documents.jsonl": "5a376f0a2b5d6022a0fde2dfb96141e227173bba1f0196fb95ecbde61154b97e",
+      "metadata.json": "8beca430a890eea66783c148c6b94b651839157f09bd1bb54f5862e85b1ca437"
+    },
+    "raw_text_or_tokenized_corpus_included": false
+  },
+  "recorded_runtime": {
+    "gpu": "NVIDIA GeForce RTX 3080 Laptop GPU",
+    "torch": "2.7.1+cu128",
+    "cuda": "12.8",
+    "precision": "CUDA BF16 autocast; FP32 parameters. V50 uses its recorded mixed routing mode.",
+    "tf32_allowed": true,
+    "bitwise_determinism_guaranteed": false,
+    "historical_timing_not_controlled_benchmark": true
+  },
+  "scope": "The two original fresh long-schedule runs only. Earlier short-schedule pilots and later routing interventions are not merged into these results.",
+  "provenance": {
+    "original_protocol_sha256": "0376a782ad1e87b638a38c2bc60e4ab3706675775a4ad1448ea631155b1b7c80",
+    "original_controller_sha256": "2c4d8977105b3a53f159b2e01974174eba8c561e00c313e6eac5e8529e86a384",
+    "runs": {
+      "MLP": {
+        "metrics_sha256": "f64934aa20aad4c9a9c791986f792136d85a6b345c2a41382f2a5d8ba1c1dfaf",
+        "manifest_sha256": "2cdc99ce6014e3fea4fd88a98732cff989447a711d6d2469f999619977078df1",
+        "native_source_sha256": {
+          "model.py": "9714df3c49414a43c9b43fc38ed3b273500a1df6849044772e416c5f911143e8",
+          "train.py": "e595ec916135ad45fa984d5285fa3403fa7ec0fd636f49203ffe935e518ca7f9"
+        },
+        "matched_checkpoint_audit_sha256": "a7f11cb4153a9f7174ebfe1a1361eef7d5121a4aec7a48332ab65d74bdce2b93",
+        "matched_checkpoint_sha256_recorded_by_audit": "06ebcce52962ec7c66521f9e934ab01b857beca484fa744a93cb6c38fa007269"
+      },
+      "V50": {
+        "metrics_sha256": "a4472eb3b806462c1d31f384449bfb47df574139e17641fccb9fb46bf78b540a",
+        "manifest_sha256": "949bbea963a091a160c909bde1647eb0dcd1930a3f7392775de410c5379cda14",
+        "native_source_sha256": {
+          "train.py": "ecf12d9dc38a2b039b2d04829ffb4ef1a942a38e85865b280e6282d70bf3e5f6",
+          "model.py": "278fab2c6d2cbbfecf32c020aa83ca171025cb069990a425e5db183a887bc35b",
+          "v15.py": "f6d2d2151d30329649d52ec9c49f9c2cafbc48caf5f6b8f85382aae35c455b6b"
+        },
+        "matched_checkpoint_audit_sha256": "9498e8ea53f2f232280c4d937c5b74a33374ea37c438e46b76bd4f8f5c2b2d26",
+        "matched_checkpoint_sha256_recorded_by_audit": "f013c1b769a4188b13346cc080886ff23e0d4cd207ed7b8cb1601f7a55be24eb"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# Python 3.12.3 was used for the recorded runs (Python >=3.11 required).
+# Recorded training: torch 2.7.1+cu128, CUDA 12.8. Install that build first:
+# python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+# CPU tests also work with the CPU build; their speed/precision is not the training setup.
+torch==2.7.1
+numpy==2.5.3
+tokenizers==0.23.2
+pyarrow==23.0.1
+matplotlib==3.11.2

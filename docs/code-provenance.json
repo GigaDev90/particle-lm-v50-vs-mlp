@@ -1,0 +1,90 @@
+{
+  "schema": "public-code-export-provenance-v1",
+  "canonical_experiment": "FineWeb fresh 1B-token schedule, seed 1337",
+  "files": [
+    {
+      "public_file": "models/v50/model.py",
+      "source_label": "fineweb-full-scratch/v50/source/model.py",
+      "original_sha256": "278fab2c6d2cbbfecf32c020aa83ca171025cb069990a425e5db183a887bc35b",
+      "export_sha256": "278fab2c6d2cbbfecf32c020aa83ca171025cb069990a425e5db183a887bc35b",
+      "changes": []
+    },
+    {
+      "public_file": "models/v50/v15.py",
+      "source_label": "fineweb-full-scratch/v50/source/v15.py",
+      "original_sha256": "f6d2d2151d30329649d52ec9c49f9c2cafbc48caf5f6b8f85382aae35c455b6b",
+      "export_sha256": "f6d2d2151d30329649d52ec9c49f9c2cafbc48caf5f6b8f85382aae35c455b6b",
+      "changes": []
+    },
+    {
+      "public_file": "models/v50/train.py",
+      "source_label": "fineweb-full-scratch/v50/source/train.py",
+      "original_sha256": "ecf12d9dc38a2b039b2d04829ffb4ef1a942a38e85865b280e6282d70bf3e5f6",
+      "export_sha256": "21de4e823c49c0cc4efce2704708365f62a8cb95e603c9f2adcc14f7ba9c400c",
+      "changes": [
+        "Replace machine-specific DEFAULT_DATA with data/fineweb-edu-1b-v1.",
+        "Remove unused legacy TinyStories BASELINE_LOSS and its manifest final_val_loss field; retain parameter-count reference."
+      ]
+    },
+    {
+      "public_file": "models/mlp/model.py",
+      "source_label": "fineweb-full-scratch/mlp/source/model.py",
+      "original_sha256": "9714df3c49414a43c9b43fc38ed3b273500a1df6849044772e416c5f911143e8",
+      "export_sha256": "9714df3c49414a43c9b43fc38ed3b273500a1df6849044772e416c5f911143e8",
+      "changes": []
+    },
+    {
+      "public_file": "models/mlp/train.py",
+      "source_label": "fineweb-full-scratch/mlp/source/train.py",
+      "original_sha256": "e595ec916135ad45fa984d5285fa3403fa7ec0fd636f49203ffe935e518ca7f9",
+      "export_sha256": "09b6e937005382c422ff0e6f50a5d063e09e596bc4dfb72e2dfcbceb541364ee",
+      "changes": [
+        "Replace historical relative TinyStories data default with data/fineweb-edu-1b-v1."
+      ]
+    },
+    {
+      "public_file": "configs/v50.json",
+      "source_label": "fineweb-full-scratch/v50/model-config",
+      "original_sha256": "bef640f03ee60b1fac3a126250c8fbbc9cdeb31cf97c87761c41a636d623e089",
+      "export_sha256": "bef640f03ee60b1fac3a126250c8fbbc9cdeb31cf97c87761c41a636d623e089",
+      "changes": []
+    },
+    {
+      "public_file": "configs/mlp.json",
+      "source_label": "fineweb-full-scratch/mlp/model-config",
+      "original_sha256": "efa012ce2e975f7cd2a31eae8758c275c630f34fd67664dc93ea8f448acc03dc",
+      "export_sha256": "efa012ce2e975f7cd2a31eae8758c275c630f34fd67664dc93ea8f448acc03dc",
+      "changes": []
+    }
+  ],
+  "computational_changes": false,
+  "export_policy": "Original architecture, optimizer, clipping, sampling, schedule, initialization and precision settings are unchanged. Only command-line data defaults and obsolete descriptive metadata are edited.",
+  "observed_environment": {
+    "python": "3.12.3",
+    "torch": "2.7.1+cu128",
+    "cuda": "12.8",
+    "numpy": "2.5.3",
+    "tokenizers": "0.23.2",
+    "pyarrow": "23.0.1",
+    "matplotlib": "3.11.2"
+  },
+  "source_notice_audit": "No explicit license or copyright/authorship header was present in these five frozen source files. This statement neither establishes third-party provenance nor grants a license.",
+  "reproducibility_limit": "GPU kernels and dependency/hardware differences can change numerical results. Exported source and regenerated metadata hashes differ where portability edits are listed; historical source hashes remain recorded here.",
+  "validation": {
+    "cpu_tests": 8,
+    "passed": 8,
+    "frozen_reference_parity": "Both models match original frozen initial state, post-construction RNG, toy logits/loss, all parameter gradients and one synthetic clipped optimizer step exactly.",
+    "other_checks": [
+      "V50 changes only initial resident down weights by factor 0.5 without additional random draws.",
+      "Recorded full parameter counts and tied token/output embeddings.",
+      "Causality and token input immutability.",
+      "Independent tangent Adam first-step formula and unchanged saved raw-norm clipping.",
+      "Matched window sampling, validation offsets and cosine schedule.",
+      "Public source/config file digests match this export inventory."
+    ],
+    "test_file": "tests/test_models.py",
+    "test_sha256": "97ee320832bbaa8ce3baabaae2ca28b48ab020828b476b42e62a0beddd9b673c",
+    "gpu_used": false,
+    "real_training_launched": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "dataset": "HuggingFaceFW/fineweb-edu",
+  "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+  "variant": "sample-10BT",
+  "license": "ODC-BY",
+  "attribution": "FineWeb-Edu, Hugging Face; The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale, https://arxiv.org/abs/2406.17557",
+  "dtype": "uint16",
+  "byte_order": "little",
+  "vocab_size": 8192,
+  "eos_token": "<|endoftext|>",
+  "eos_token_id": 0,
+  "train_tokens": 1000000163,
+  "val_tokens": 2000383,
+  "test_tokens": 2001913,
+  "packing": "One EOS per complete document; concatenated bins allow native attention windows to cross document boundaries.",
+  "split_policy": "SHA256 of outer-whitespace-stripped exact UTF8 content; first64 digest bits modulo10000: [0,9900) train, [9900,9950) val, [9950,10000) test.",
+  "limitations": [
+    "Hash splits prevent exact-content copies crossing splits, including copies elsewhere in the source pool; near/semantic duplicates are not removed.",
+    "Training/validation/test token targets are lower bounds because the final document is never truncated.",
+    "Source-order selection is a deterministic prefix within each split, not a uniform document sample of the entire10BT pool.",
+    "Test documents are prepared but must not be used to tune architecture or training choices."
+  ]
+}

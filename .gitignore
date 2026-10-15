@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+runs/
+data/fineweb-edu-1b-v1/
+*.pt
+*.pth
+*.bin
+*.parquet
+*.sqlite
+.DS_Store
