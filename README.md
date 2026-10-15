@@ -42,13 +42,27 @@ For the MLP, the branch is `down(GELU(up(h)))`. In V50, each resident has a norm
 
 See [the architecture and equations](docs/architecture.md) and the portable source bundles in [models/v50](models/v50) and [models/mlp](models/mlp).
 
+## Inside the residents
+
+A frozen-model analysis at the **same 500M-token checkpoint** measures activity, movement and geometry across all **3,488 residents**. The main statistics use 256 development documents and 8,192 sampled positions, with 256 separate reference documents.
+
+- **43.64% of token–resident interactions are exactly zero.** This is input-dependent sparsity, not a fraction of permanently unused parameters.
+- **Block 1 activates 93.48% of its residents per query; block 3 activates 7.04%.** The average effective response count is only 16.78 of 109 residents per space, indicating unequal contribution magnitudes.
+- **Residents rotate by 15.41° on average** from their initial directions. Movement alone does not establish semantic organization.
+
+![Resident activity and concentration by block](figures/residents/resident_activity.png)
+
+![Activity of all residents across the 32 routing spaces](figures/residents/resident_usage.png)
+
+The [resident report](docs/residents.md) contains six figures, per-resident measurements, movement/radius distributions, query-cloud projections, and activity through training. It distinguishes the new CPU FP32 document sample from the native one-window training diagnostics. Rebuild its figures with `python scripts/plot_residents.py`. No sparse-execution speedup or pruning-accuracy result is claimed.
+
 ## Findings and limits
 
 - V50 learns faster in token terms early in these runs. Its advantage narrows from 13.44% at approximately 20M tokens to 2.47% at approximately 500M.
 - The advantage remains at the later matched checkpoints shown above. It does not establish what happens after a completed 1B-token run, on other datasets, or across seeds.
 - Parameter counts are close, but compute is not matched. V50 took about 1.66× the recorded training time. It still evaluates resident responses densely, including responses whose gates become zero. These results establish no sparse-inference or speed advantage.
 - This compares the complete model/training recipes. V50's spherical position optimizer and specialized clipping are part of its recipe, so the outcome does not isolate the architecture from optimization.
-- Validation windows have been reused during architecture research. The separately prepared test split was not used for these published measurements. No confidence intervals are available from a single seed.
+- Validation windows have been reused during architecture research. The separately prepared test split was not used for these published measurements. Uncertainty across training seeds is not estimated; the resident supplement's document-bootstrap intervals describe sampling within a single frozen checkpoint.
 
 ![Recorded training time at the matched endpoint](figures/training_time.png)
 

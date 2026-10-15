@@ -101,9 +101,9 @@
     "native_source_files_match_manifest_hashes": true,
     "fresh_zero_update_origin_confirmed": true,
     "new_training_performed_for_publication": false,
-    "new_model_inference_performed_for_publication": false,
+    "new_model_inference_performed_for_publication": true,
     "exact_gpu_replay_at_publication_time": false,
-    "scope": "Read-only metric export and historical CPU state-audit checks; no fresh numerical replay or uncertainty estimate."
+    "scope": "Accuracy comparison: read-only metric export and historical CPU state-audit checks; no fresh GPU perplexity replay or training-seed uncertainty estimate. Resident supplement: new frozen-checkpoint CPU FP32 forward diagnostics at the matched500M checkpoint; see results/residents/activity-summary.json."
   },
   "provenance": {
     "original_protocol_sha256": "0376a782ad1e87b638a38c2bc60e4ab3706675775a4ad1448ea631155b1b7c80",
@@ -133,7 +133,7 @@
     }
   },
   "limitations": [
-    "Single training seed and one repeatedly reused development sample; no confidence interval or independent test-set result.",
+    "Single training seed and one repeatedly reused development sample; no training-seed uncertainty estimate or independent test-set result. Document-bootstrap intervals in the separate resident supplement describe sampling within one frozen checkpoint.",
     "The planned 1B-token runs are incomplete. The primary comparison stops at the longest common evaluated budget of 500,039,680 sampled tokens.",
     "Sampling is with replacement; sampled-token count is not unique corpus coverage or an epoch.",
     "V50 has 0.169% more parameters and its native spherical-position optimizer differs from the baseline optimizer.",
